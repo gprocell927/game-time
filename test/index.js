@@ -1,0 +1,1 @@
+require ('./bluecifer-tests');
