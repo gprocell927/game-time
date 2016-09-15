@@ -7,25 +7,25 @@ describe("enemyArray", function () {
   it("should be an array", function () {
     assert.isArray(enemyArray);
   });
-});
+}); //end of describe enemyArray test
 
-// var Enemy = enemies.Enemy;
-//
-// describe("Enemy", function () {
-//     context("it allows me to customize it", function () {
-//       it("should let me assign a height and width", function () {
-//         var enemy = new Enemy(10, 10);
-//         assert.strictEqual(enemy.x, 10);
-//       });
-//
-//       it("should have a speed", function() {
-//         var enemy = new Enemy(10, 10, 10, 10, "../IMGS/airplane.png", 6);
-//         assert.strictEqual(enemy.speed = 6);
-//       });
-//
-//   }); // end of context
-//
-// }); // end of master Enemy function
+var Enemy = enemies.Enemy;
+
+describe("Enemy", function () {
+    context("it allows me to customize it", function () {
+      it("should let me assign a height and width", function () {
+        var enemy = new Enemy(10, 10);
+        assert.strictEqual(enemy.x, 10);
+      });
+
+      it("should have a speed", function() {
+        var enemy = new Enemy(10, 10, 10, 10, "../IMGS/airplane.png", 6);
+        assert.strictEqual(enemy.speed = 6);
+      });
+
+  }); // end of context
+
+}); // end of master Enemy function
 
 
 
