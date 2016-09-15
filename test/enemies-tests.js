@@ -19,6 +19,8 @@ describe("Enemy", function () {
 
 }); // end of master Enemy function
 
+
+
 //
 //
 // const Dingus = require('../lib/dingus');
