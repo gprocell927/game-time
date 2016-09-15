@@ -38,26 +38,15 @@ describe('Bluecifer', function () {
 
   describe ('bluecifer', function (){
 
-    it('should have a method called "moveRight()"', function () {
+    it('should have a method called "gravity()"', function () {
       var bluecifer = new Bluecifer(15, 30);
-      assert.isFunction(bluecifer.moveRight);
-    });
-
-    it('"moveRight()" should increment the "x" property by 1', function () {
-      var bluecifer = new Bluecifer(15, 30);
-      bluecifer.moveRight();
-      assert.equal(bluecifer.x, 16);
-    });
-
-    it('should have a method called "moveDown()"', function () {
-      var bluecifer = new Bluecifer(15, 30);
-      assert.isFunction(bluecifer.moveDown);
+      assert.isFunction(bluecifer.gravity);
       });
 
-    it('"moveDown()" should decrement the "y" property by 1', function () {
+    it('"gravity()" should decrement the "y" property by 1', function () {
       var bluecifer = new Bluecifer(15, 30);
-      bluecifer.moveDown();
-      assert.equal(bluecifer.y, 29);
+      bluecifer.gravity();
+      assert.equal(bluecifer.y, 31);
     });
 
     it('should have a method called "moveUp()', function () {
@@ -65,18 +54,18 @@ describe('Bluecifer', function () {
       assert.isFunction(bluecifer.moveUp);
     });
 
-    it('"moveUp()" should increment the "y" property by 1', function () {
+    it('"moveUp()" should increment the "y" property by 5', function () {
       var bluecifer = new Bluecifer(15, 30);
       bluecifer.moveUp();
-      assert.equal(bluecifer.y, 31);
+      assert.equal(bluecifer.y, 25);
     });
 
-    it ('should have a method called "topRight()"', function() {
+    it('should have a method called "topRight()"', function() {
       var bluecifer = new Bluecifer(15, 30, 45, 60);
       assert.isFunction(bluecifer.topRight);
     });
 
-    it ('"topRight()" should find the top right corner of Bluecifer', function () {
+    it('"topRight()" should find the top right corner of Bluecifer', function () {
       var bluecifer = new Bluecifer(15, 30, 45, 60);
       assert.equal(bluecifer.topRight().x, 60);
       assert.equal(bluecifer.topRight().y, 30);
