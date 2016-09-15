@@ -1,13 +1,22 @@
 const assert = require('chai').assert;
-const enemy = require("../lib/enemies.js");
+var enemies = require("../lib/enemies.js");
+
+var Enemy = enemies.Enemy;
 
 describe("Enemy", function () {
-  it("should assign a height and width", function () {
-    var enemy = new Enemy(10, 10);
-    assert.strictEqual(enemy.x, 10);
-  });
+    context("it allows me to customize it", function () {
+      it("should let me assign a height and width", function () {
+        var enemy = new Enemy(10, 10);
+        assert.strictEqual(enemy.x, 10);
+      });
 
-  it("");
+      it("should have a speed", function() {
+        var enemy = new Enemy(10, 10, 10, 10, "../IMGS/airplane.png", 6);
+        assert.strictEqual(enemy.speed = 6);
+      });
+
+  }); // end of context
+
 }); // end of master Enemy function
 
 //
