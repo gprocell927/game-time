@@ -1,2 +1,2 @@
 require ('./bluecifer-tests');
-require("./enemies-tests.js");
+require('./enemies-tests.js');
