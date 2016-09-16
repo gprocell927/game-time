@@ -18,9 +18,9 @@ describe("Enemy", function () {
         assert.strictEqual(enemy.x, 10);
       });
 
-      it("should have a speed", function() {
-        var enemy = new Enemy(10, 10, 10, 10, "../IMGS/airplane.png", 6);
-        assert.strictEqual(enemy.speed = 6);
+      it("should default to 500 for its x coord", function () {
+        var enemy = new Enemy();
+        assert.strictEqual(enemy.x, 500);
       });
 
   }); // end of context
