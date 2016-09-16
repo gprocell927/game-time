@@ -15,8 +15,9 @@ describe("enemyArray", function () {
 describe("Enemy", function () {
     context("it allows me to customize it", function () {
       it("should let me assign a height and width", function () {
-        var enemy = new Enemy(10, 10);
-        assert.strictEqual(enemy.x, 10);
+        var enemy = new Enemy({height:10, width:15});
+        assert.strictEqual(enemy.height, 10);
+        assert.strictEqual(enemy.width, 15);
       });
 
       it("should default to 500 for its x coord", function () {
