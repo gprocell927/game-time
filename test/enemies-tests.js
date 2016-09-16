@@ -1,15 +1,16 @@
 const assert = require('chai').assert;
-const enemies = require("../lib/enemies.js");
+const Enemy = require("../lib/enemies.js");
 
-var enemyArray = enemies.enemyArray;
+// var enemyArray = enemies.enemyArray;
 
 describe("enemyArray", function () {
   it("should be an array", function () {
-    assert.isArray(enemyArray);
+    var enemy = new Enemy();
+    assert.isArray(enemy.enemyArray);
   });
-}); //end of describe enemyArray test
+});
 
-var Enemy = enemies.Enemy;
+// var Enemy = enemies.Enemy;
 
 describe("Enemy", function () {
     context("it allows me to customize it", function () {
@@ -23,9 +24,8 @@ describe("Enemy", function () {
         assert.strictEqual(enemy.x, 500);
       });
 
-  }); // end of context
-
-}); // end of master Enemy function
+  });
+});
 
 
 
