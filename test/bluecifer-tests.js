@@ -1,7 +1,5 @@
-const bluecifer = require('../lib/bluecifer');
+const Bluecifer = require('../lib/bluecifer');
 const assert = require('chai').assert;
-
-var Bluecifer = bluecifer.Bluecifer;
 
 describe('Bluecifer', function () {
 
