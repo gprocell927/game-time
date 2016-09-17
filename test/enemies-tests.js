@@ -74,4 +74,5 @@ describe("Enemy.prototype.randomSpeed", function () {
     var enemy = new Enemy();
     assert.isBelow(enemy.randomSpeed(), 6);
   });
+
 }); // end of describe Enemy.prototype.randomSpeed
