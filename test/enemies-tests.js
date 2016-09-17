@@ -28,9 +28,10 @@ describe("Enemy", function () {
   });
 }); // end of describe Enemy
 
-describe("Enemy.detectCollision", function () {
-  it("should be a function", function () {
-    var enemigo = new Enemy();
-    assert.isFunction(enemigo.collision());
+describe("Enemy.collision()", function () {
+  it("should record an enemy's x value", function () {
+    var enemy = new Enemy();
+    enemy.collision();
+    assert.strictEqual(enemy.x, 500);
   });
 });
