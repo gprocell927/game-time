@@ -69,4 +69,9 @@ describe("Enemy.prototype.randomSpeed", function () {
     var enemy = new Enemy();
     assert.isAbove(enemy.randomSpeed(), 0.5);
   });
+
+  it("should never assign a speed above 6", function () {
+    var enemy = new Enemy();
+    assert.isBelow(enemy.randomSpeed(), 6);
+  });
 }); // end of describe Enemy.prototype.randomSpeed
