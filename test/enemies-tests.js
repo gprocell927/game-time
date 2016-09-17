@@ -1,9 +1,6 @@
 const assert = require('chai').assert;
 const Enemy = require("../lib/enemies.js");
 
-<<<<<<< HEAD
-// var enemyArray = enemies.enemyArray;
-
 describe("enemyArray", function () {
 
   it("should be an array", function () {
@@ -12,8 +9,6 @@ describe("enemyArray", function () {
   });
 });
 
-=======
->>>>>>> f9c70e7118ff48b266ab0821638db29d3d5e542f
 describe("Enemy", function () {
 
   it('should be a function', function () {
