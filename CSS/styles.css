@@ -27,6 +27,14 @@ h2 {
   text-transform: uppercase;
 }
 
+h3 {
+  color: #FFF;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  letter-spacing: 2px;
+  position: absolute;
+}
+
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
@@ -46,4 +54,14 @@ header {
   margin: 0 auto;
   left: 0;
   right: 0;
+}
+
+#game-over-text {
+  margin-top: 30%;
+}
+
+#game-wrapper {
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
 }
