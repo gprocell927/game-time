@@ -80,6 +80,15 @@ describe('Bluecifer', function () {
       assert.equal(bluecifer.bottomRight().y, 90);
     });
 
+    it.skip ('"draw" should create Bluecifer onto the canvas', function() {
+      var bluecifer = new Bluecifer();
+      var image = new Image();
+      image.src = "../IMGS/blue.png";
+      assert(bluecifer.draw(ctx), "../IMGS/blue.png");
+
+    });
+
+    it.skip('should have a function called "findBottomEdge()"', function (){});
 
 
 
@@ -87,7 +96,7 @@ describe('Bluecifer', function () {
 
 
 
-  })
+  });
 
 
 
