@@ -35,7 +35,7 @@ describe("Enemy", function () {
       });
 
   });
-});
+}); //end of describe Enemy
 
 describe ('enemy', function () {
 
@@ -62,4 +62,17 @@ describe ('enemy', function () {
         var enemy = new Enemy();
         assert.isBelow(enemy.y, 301);
       });
-}); // end of describe Enemy
+}); // end of describe enemy
+
+describe("Enemy.prototype.randomSpeed", function () {
+  it("should never assign a speed below 0.5", function () {
+    var enemy = new Enemy();
+    assert.isAbove(enemy.randomSpeed(), 0.5);
+  });
+
+  it("should never assign a speed above 6", function () {
+    var enemy = new Enemy();
+    assert.isBelow(enemy.randomSpeed(), 6);
+  });
+
+}); // end of describe Enemy.prototype.randomSpeed
