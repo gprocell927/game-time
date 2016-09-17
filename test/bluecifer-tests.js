@@ -52,10 +52,10 @@ describe('Bluecifer', function () {
       assert.isFunction(bluecifer.moveUp);
     });
 
-    it('"moveUp()" should increment the "y" property by 10', function () {
+    it('"moveUp()" should increment the "y" property by 20', function () {
       var bluecifer = new Bluecifer(15, 30);
       bluecifer.moveUp();
-      assert.equal(bluecifer.y, 20);
+      assert.equal(bluecifer.y, 10);
     });
 
     it('should have a method called "topRight()"', function() {
