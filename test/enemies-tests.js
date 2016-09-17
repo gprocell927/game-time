@@ -1,14 +1,6 @@
 const assert = require('chai').assert;
 const Enemy = require("../lib/enemies.js");
 
-describe("enemyArray", function () {
-
-  it("should be an array", function () {
-    var enemy = new Enemy();
-    assert.isArray(enemy.enemyArray);
-  });
-});
-
 describe("Enemy", function () {
 
   it('should be a function', function () {
@@ -27,9 +19,9 @@ describe("Enemy", function () {
         assert.strictEqual(enemy.width, 15);
       });
 
-      it("should default to 500 for its x coord", function () {
+      it("should default to 800 for its x coord", function () {
         var enemy = new Enemy();
-        assert.strictEqual(enemy.x, 500);
+        assert.strictEqual(enemy.x, 800);
       });
 
       it('should assign the width to 50 by default', function () {
@@ -46,9 +38,6 @@ describe("Enemy", function () {
 });
 
 describe ('enemy', function () {
-
-
-});
 
       it("should have a default width of 50", function () {
         var enemy = new Enemy();
@@ -73,5 +62,4 @@ describe ('enemy', function () {
         var enemy = new Enemy();
         assert.isBelow(enemy.y, 301);
       });
-  });
 }); // end of describe Enemy
