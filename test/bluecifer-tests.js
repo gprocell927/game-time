@@ -87,7 +87,7 @@ describe('Bluecifer', function () {
 
 
 
-  })
+  });
 
 
 
