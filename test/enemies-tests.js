@@ -1,17 +1,6 @@
 const assert = require('chai').assert;
 const Enemy = require("../lib/enemies.js");
-const Bluecifer = require('../lib/bluecifer');
-
-// var enemyArray = enemies.enemyArray;
-
-describe("enemyArray", function () {
-  it("should be an array", function () {
-    var enemy = new Enemy();
-    assert.isArray(enemy.enemyArray);
-  });
-});
-
-// var Enemy = enemies.Enemy;
+// const Bluecifer = require('../lib/bluecifer');
 
 describe("Enemy", function () {
     context("it allows me to customize it", function () {
@@ -26,20 +15,9 @@ describe("Enemy", function () {
         assert.strictEqual(enemy.x, 500);
       });
 
+      it("should have a default width of 50", function () {
+        var enemy = new Enemy();
+        assert.strictEqual(enemy.width, 50);
+      });
   });
 }); // end of describe Enemy
-
-describe("Enemy.collision()", function () {
-  it("should record an enemy's x value", function () {
-    var enemy = new Enemy();
-    enemy.collision();
-    assert.strictEqual(enemy.x, 500);
-  });
-
-  it("should record bluecifer's x coord", function () {
-    var bluecifer = new Bluecifer (150, 150, 50, 41);
-    var enemy = new Enemy();
-    enemy.collision();
-    assert.strictEqual(bluecifer.x, 150);
-  });
-}); //end of describe Enemy.collision();
