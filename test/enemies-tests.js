@@ -24,5 +24,10 @@ describe("Enemy", function () {
         var enemy = new Enemy();
         assert.strictEqual(enemy.height, 35);
       });
+
+      it("should have a default pic of the airplane", function () {
+        var enemy = new Enemy();
+        assert.strictEqual(enemy.image, "../IMGS/airplane.png");
+      });
   });
 }); // end of describe Enemy
