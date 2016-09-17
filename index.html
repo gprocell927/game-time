@@ -2,13 +2,31 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" style="text/css" href="styles.css"/>
-  <title>Game Time</title>
+  <link rel="stylesheet" href="./CSS/reset.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Press+Start+2P" rel="stylesheet">
+  <link rel="stylesheet" style="text/css" href="./CSS/styles.css"/>
+  <title>Bluecifer's Revenge</title>
 </head>
 <body>
-  <canvas id="canvas" width="600" height="400">
+  <header>
+    <h1>Bluecifer's <span>Revenge</span></h1>
+    <p>Press "Space" to start game and to help Bluecifer avoid the airplanes and keep from hitting the ground so he can return safely home to DIA.</p>
+  </header>
 
-  </canvas>
+    <div id="game-over">
+      <section id="game-over-text">
+        <h2>game over</h2>
+        <p>press "Space" to continue.</p>
+      </section>
+    </div>
+
+    <div id="game-wrapper">
+      <h3 id="game-score">000000</h3>
+      <canvas id="canvas" width="600" height="400"></canvas>
+    </div>
+  </section>
+
+
   <script src="main.bundle.js"></script>
 </body>
 </html>
