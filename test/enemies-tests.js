@@ -30,12 +30,12 @@ describe("Enemy", function () {
         assert.strictEqual(enemy.image, "../IMGS/airplane.png");
       });
 
-      it("should have a default speed of 1", function () {
+      it("should have a default speed of equal or less than 3", function () {
         var enemy = new Enemy();
-        assert.strictEqual(enemy.speed, 1);
+        assert.isBelow(enemy.speed, 3.001);
       });
 
-      it("should have a default y coord of less than 300", function () {
+      it("should have a default y coord of equal or less than 300", function () {
         var enemy = new Enemy();
         assert.isBelow(enemy.y, 301);
       });
