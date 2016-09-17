@@ -19,5 +19,10 @@ describe("Enemy", function () {
         var enemy = new Enemy();
         assert.strictEqual(enemy.width, 50);
       });
+
+      it("should have a default height of 35", function () {
+        var enemy = new Enemy();
+        assert.strictEqual(enemy.height, 35);
+      });
   });
 }); // end of describe Enemy
