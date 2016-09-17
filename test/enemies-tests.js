@@ -1,6 +1,5 @@
 const assert = require('chai').assert;
 const Enemy = require("../lib/enemies.js");
-// const Bluecifer = require('../lib/bluecifer');
 
 describe("Enemy", function () {
     context("it allows me to customize it", function () {
