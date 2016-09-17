@@ -90,12 +90,6 @@ describe('Bluecifer', function () {
 
     it.skip('should have a function called "findBottomEdge()"', function (){});
 
-
-
-
-
-
-
   });
 
 
