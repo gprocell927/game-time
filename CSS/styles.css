@@ -2,23 +2,48 @@ body {
   text-align: center;
 }
 
+canvas {
+  background-color: grey;
+}
+
 h1 {
   color: #003EB2;
   font-family: 'Press Start 2P', cursive;
   font-size: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+h1 span {
+  color: #FF3C19;
 }
 
 h2 {
   color: #000;
   font-family: 'Press Start 2P', cursive;
   font-size: 16px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 p {
-  font-family: 'Open Sane', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 15px;
+  padding: 5px;
+  letter-spacing: 0.2px;
+  line-height: 1.4em;
 }
 
-h1 span {
-  color: #FF3C19;
+header {
+  margin: 35px;
+}
+
+#game-over {
+  height: 400px;
+  width: 600px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
 }
