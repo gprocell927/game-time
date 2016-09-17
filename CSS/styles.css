@@ -69,3 +69,7 @@ header {
   margin: 0 auto;
   position: relative;
 }
+
+#canvas {
+  background-image: url(../IMGS/background.jpg);
+}
