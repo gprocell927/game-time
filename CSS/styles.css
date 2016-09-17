@@ -1,3 +1,24 @@
 body {
-  
+  text-align: center;
+}
+
+h1 {
+  color: blue;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+}
+
+h2 {
+  color: #000;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+}
+
+p {
+  font-family: 'Open Sane', sans-serif;
+  font-size: 15px;
+}
+
+h1 span {
+  color: red;
 }
