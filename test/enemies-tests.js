@@ -29,5 +29,15 @@ describe("Enemy", function () {
         var enemy = new Enemy();
         assert.strictEqual(enemy.image, "../IMGS/airplane.png");
       });
+
+      it("should have a default speed of 1", function () {
+        var enemy = new Enemy();
+        assert.strictEqual(enemy.speed, 1);
+      });
+
+      it("should have a default y coord of less than 300", function () {
+        var enemy = new Enemy();
+        assert.isBelow(enemy.y, 301);
+      });
   });
 }); // end of describe Enemy
