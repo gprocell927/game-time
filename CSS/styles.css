@@ -59,6 +59,10 @@ header {
   z-index: 99;
 }
 
+#game-over {
+  visibility: hidden;
+}
+
 #start-game-text, #game-over-text {
   margin-top: 30%;
 }
