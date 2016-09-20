@@ -77,3 +77,7 @@ header {
 #canvas {
   background-image: url(../IMGS/background.jpg);
 }
+
+#you-win {
+  visibility: hidden;
+}
