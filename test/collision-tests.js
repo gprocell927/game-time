@@ -11,7 +11,7 @@ describe('Collision', function() {
     });
   });
   context ('when Bluecifer hits a plane', function(){
-    it.skip ('returns true if Bluecifer\'s front collides with plane\' front', function(){
+    it ('returns true if Bluecifer\'s front collides with plane\' front', function(){
       bluecifer = new Bluecifer({x:15, y:30, width:45, height:60});
       enemy = new Enemy({x: 15, y: 30, width:45, height:60});
       enemy.collision(enemy, bluecifer);
@@ -23,9 +23,7 @@ describe('Collision', function() {
       bluecifer = new Bluecifer({x:15, y:30, width:45, height:60});
       enemy = new Enemy({x: 15, y: 30, width:45, height:60});
       enemy.collision(enemy, bluecifer);
-
-
-    })
+    });
 
 
 
