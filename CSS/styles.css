@@ -2,17 +2,13 @@ body {
   text-align: center;
 }
 
-canvas {
-  background-color: grey;
-}
-
 h1 {
   color: #003EB2;
   font-family: 'Press Start 2P', cursive;
   font-size: 20px;
   letter-spacing: 3px;
-  text-transform: uppercase;
   margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 h1 span {
@@ -37,12 +33,16 @@ h3 {
   top: 15px;
 }
 
+canvas {
+  background-color: grey;
+}
+
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 15px;
-  padding: 5px;
   letter-spacing: 0.2px;
   line-height: 1.4em;
+  padding: 5px;
 }
 
 header {
@@ -51,11 +51,11 @@ header {
 
 #start-game, #game-over, #you-win {
   height: 400px;
-  width: 600px;
-  position: absolute;
-  margin: 0 auto;
   left: 0;
+  margin: 0 auto;
+  position: absolute;
   right: 0;
+  width: 600px;
   z-index: 99;
 }
 
@@ -77,10 +77,10 @@ header {
 }
 
 #game-wrapper {
-  width: 600px;
   height: 400px;
   margin: 0 auto;
   position: relative;
+  width: 600px;
 }
 
 #canvas {
