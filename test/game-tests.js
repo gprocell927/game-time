@@ -46,10 +46,9 @@ describe ('Game', function() {
     it('should pass on first condition', function() {
       var game = new Game();
       game.enemies.push(new Enemy({x: 1, y:2}));
-      game.bluecifer = new Bluecifer({x: 1, y: 3});
+      game.bluecifer = new Bluecifer({x: 7, y: 10});
       game.detectEnemyCollision();
-      assert(game.active);
-
+      assert(game.active, true);
     });
   });
 });
