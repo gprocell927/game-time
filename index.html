@@ -11,36 +11,38 @@
   <header>
     <h1>Bluecifer's <span>Revenge</span></h1>
     <p>Click on the screen to start game and to help Bluecifer avoid the airplanes and keep from hitting the ground so he can return safely home to DIA.</p>
-    <p id="message-center">(Press the Enter key to turn off the music.)</p>
+    <p>(Press the Enter key to turn off the music.)</p>
   </header>
 
-    <div id="start-game">
-      <section id="start-game-text">
+    <section id="start-game">
+      <article id="start-game-text">
         <h2>Start Game</h2>
         <p>Click anywhere to start a new game.</p>
-      </section>
-    </div>
+      </article>
+    </section>
 
-    <div id="game-over">
-      <section id="game-over-text">
+    <section id="game-over">
+      <article id="game-over-text">
         <h2>Game Over</h2>
         <p>Click anywhere to start a new game.</p>
-      </section>
-    </div>
+      </article>
+    </section>
 
-    <div id="you-win">
-      <h2>You win!</h2>
-    </div>
+    <section id="you-win">
+      <h2 id="you-win-text">You win!</h2>
+    </section>
 
-    <div id="game-wrapper">
+    <section id="game-wrapper">
       <h3 id="game-score">000000</h3>
       <canvas id="canvas" width="600" height="400"></canvas>
-    </div>
+    </section>
+
+    <section>
+      <h4 id="final-score-display"></h4>
+    </section>
 
     <audio id="theme-song" src="music/spark-mandrill.mp3" loop="loop"></audio>
     <audio id="celebration" src="music/celebration.mp3"></audio>
-
-    </audio>
 
   <script src="main.bundle.js"></script>
 </body>
