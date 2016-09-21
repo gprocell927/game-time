@@ -44,8 +44,52 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var $ = __webpack_require__(1);
-	require = './bluecifer';
+	var $ = __webpack_require__(1);
+
+	var Enemy = __webpack_require__(2);
+	var Game = __webpack_require__(3);
+
+	var enemy = new Enemy();
+	var game = new Game();
+
+	$('start-game').css('visibility', 'visible');
+
+	function repeat() {
+	  if (game.active === true) {
+	    setTimeout(function () {
+	      requestAnimationFrame(repeat);
+	      game.repeat();
+	    }, 1000 / 100);
+	  }
+	}
+
+	$(document).on("click", function () {
+	  $('#start-game').css('visibility', 'hidden');
+	  $('#game-over').css('visibility', 'hidden');
+	  $('#you-win').css('visibility', 'hidden');
+	  $("#final-score-display").text("");
+	  game.startGame();
+	  repeat();
+	  enemy.increaseCounter();
+	  game.pauseCelebration();
+	  game.playThemeSong();
+	});
+
+	$(document).on("keydown", function (key) {
+	  if (key.which === 32) {
+	    if ($('start-game').css('visibility', 'hidden')) {
+	      game.bluecifer.moveUp();
+	      game.detectCeilingCollision();
+	    } else {
+	      game.resetGame();
+	    }
+	  } else if (key.which === 13) {
+	    game.pauseThemeSong();
+	  } else if (key.which === 85 && $('start-game').css('visibility', 'visible')) {
+	    var code = prompt("Enter cheat code");
+	    game.cheat(code);
+	  }
+	});
 
 /***/ },
 /* 1 */
@@ -10126,6 +10170,299 @@
 	return jQuery;
 	} );
 
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1);
+
+	var counter = 0;
+
+	function Enemy(options) {
+	  this.options = options || {};
+	  this.id = Date.now();
+	  this.x = this.options.x || 800;
+	  this.y = this.options.y || this.randomY();
+	  this.width = this.options.width || 50;
+	  this.height = this.options.height || 35;
+	  this.image = this.options.image || "../IMGS/airplane.png";
+	  this.speed = this.options.speed || this.randomSpeed();
+	}
+
+	Enemy.prototype.resetCounter = function () {
+	  counter = 0;
+	};
+
+	Enemy.prototype.increaseCounter = function () {
+	  counter++;
+	};
+
+	Enemy.prototype.randomY = function () {
+	  var min = 0;
+	  var max = 300;
+	  return Math.floor(Math.random() * (max - min) + min);
+	};
+
+	Enemy.prototype.randomSpeed = function () {
+	  this.increaseCounter();
+	  var min;
+	  var max;
+
+	  if (counter < 1000) {
+	    min = 0.5;
+	    max = 3;
+	    $('#game-score').css("color", "black");
+	  } else if (counter < 2000) {
+	    min = 1.5;
+	    max = 3;
+	    $('#game-score').css("color", "green");
+	  } else if (counter < 3000) {
+	    //six seconds
+	    min = 2.5;
+	    max = 4;
+	    $('#game-score').css("color", "rgb(153, 152, 25)");
+	  } else if (counter < 4000) {
+	    min = 3.5;
+	    max = 5;
+	    $('#game-score').css("color", "red");
+	  } else if (counter < 5000) {
+	    min = 4.5;
+	    max = 6;
+	  }
+
+	  return Math.random() * (max - min) + min;
+	}; //end of randomSpeed()
+
+	Enemy.prototype.draw = function (ctx) {
+	  var image = new Image();
+	  image.src = this.image;
+	  ctx.drawImage(image, this.x, this.y, this.width, this.height);
+	  return this;
+	};
+
+	Enemy.prototype.moveLeftRandom = function () {
+	  this.x = this.x - this.randomSpeed();
+	  if (this.x < 0) {
+	    this.x = 800;
+	    this.y = this.randomY();
+	  }
+	};
+
+	Enemy.prototype.bottomRight = function () {
+	  var x = this.x + this.width;
+	  var y = this.y + this.height;
+	  return { x: x, y: y };
+	};
+
+	module.exports = Enemy;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1);
+
+	var canvas = document.getElementById("canvas");
+
+	var Enemy = __webpack_require__(2);
+	var Bluecifer = __webpack_require__(4);
+
+	var enemy = new Enemy();
+
+	function Game() {
+	  this.themeSong = new Audio("music/spark-mandrill.mp3");
+	  this.celebration = new Audio("music/celebration.mp3");
+	  this.canvas = canvas;
+	  this.ctx = this.canvas.getContext('2d');
+	  this.bluecifer = new Bluecifer();
+	  this.active = true;
+	  this.enemies = [];
+	  this.collisionCanHappen = true;
+	  this.scoreCounter = 0;
+	}
+
+	Game.prototype.repeat = function () {
+	  var blueciferY = this.bluecifer.y;
+	  this.clearCanvas();
+	  this.bluecifer.draw(this.ctx);
+	  this.bluecifer.gravity();
+	  this.detectFloorCollision();
+	  this.createNewEnemies();
+	  this.drawEnemiesFromArray(blueciferY);
+	  this.detectEnemyCollision();
+	  this.keepScore();
+	};
+
+	Game.prototype.clearCanvas = function () {
+	  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	};
+
+	Game.prototype.bluecifer = function () {
+	  this.bluecifer.draw(this.ctx);
+	};
+
+	Game.prototype.blueciferGravity = function () {
+	  this.bluecifer.gravity();
+	};
+
+	Game.prototype.createNewEnemies = function () {
+	  if (this.scoreCounter % 100 === 0) {
+	    if (this.enemies.length < 5) {
+	      this.enemies.push(new Enemy());
+	    }
+	  }
+	};
+
+	Game.prototype.drawEnemiesFromArray = function (blueciferY) {
+	  var theBigY = blueciferY;
+	  var blues = {};
+	  blues.x = 150;
+	  blues.y = theBigY;
+	  blues.width = 50;
+	  blues.height = 35;
+
+	  this.enemies.forEach(function (enemy) {
+	    enemy.moveLeftRandom();
+	    enemy.draw(canvas.getContext("2d"));
+	  });
+	};
+
+	Game.prototype.detectEnemyCollision = function () {
+	  var b = this.bluecifer;
+	  var self = this;
+	  this.enemies.forEach(function (enemy) {
+	    var blueciferBottomLeft = b.y + b.height;
+
+	    var enemyTopRight = enemy.x + enemy.width;
+
+	    var blueciferTopRight = b.x + b.width;
+
+	    var enemyBottomLeft = enemy.y + enemy.height;
+
+	    if (enemyBottomLeft < b.y || enemy.y > blueciferBottomLeft || enemyTopRight < b.x || enemy.x > blueciferTopRight || self.collisionCanHappen === false) {} else {
+	      self.gameOver();
+	    }
+	  });
+	};
+
+	Game.prototype.detectCeilingCollision = function () {
+	  if (this.bluecifer.y < 0) {
+	    this.bluecifer.y = this.bluecifer.y + 20;
+	  }
+	};
+
+	Game.prototype.detectFloorCollision = function () {
+	  if (this.bluecifer.y > 350) {
+	    this.gameOver();
+	    this.pauseThemeSong();
+	  }
+	};
+
+	Game.prototype.startGame = function () {
+	  this.scoreCounter = 0;
+	  enemy.resetCounter();
+	  this.bluecifer.y = 100;
+	  this.active = true;
+	};
+
+	Game.prototype.keepScore = function () {
+	  var currentScore = this.scoreCounter++;
+	  if (currentScore <= 100) {
+	    $('#game-score').text("000" + currentScore);
+	  } else if (currentScore <= 1000) {
+	    $('#game-score').text("00" + currentScore);
+	  } else if (currentScore <= 10000) {
+	    $('#game-score').text("0" + currentScore); //when they beat the game
+	    this.enemies.length = 0;
+	    this.active = false;
+	    $("#start-game").css('visibility', 'visible');
+	    $('#you-win').css('visibility', 'visible');
+	    this.pauseThemeSong();
+	    this.playCelebration();
+	  } else {
+	    $('#game-score').text(currentScore);
+	  }
+	};
+
+	Game.prototype.gameOver = function () {
+	  $('#game-over').css('visibility', 'visible');
+
+	  this.enemies.length = 0;
+	  this.active = false;
+	  this.pauseThemeSong();
+	  $("#final-score-display").text("Your final score was " + this.scoreCounter);
+	};
+
+	Game.prototype.playThemeSong = function () {
+	  this.themeSong.play();
+	};
+
+	Game.prototype.pauseThemeSong = function () {
+	  this.themeSong.pause();
+	};
+
+	Game.prototype.playCelebration = function () {
+	  this.celebration.play();
+	};
+
+	Game.prototype.pauseCelebration = function () {
+	  this.celebration.pause();
+	};
+
+	Game.prototype.cheat = function (code) {
+	  if (code === "dogs") {
+	    this.collisionCanHappen = false;
+	    alert("Cheat mode activated!");
+	  } else {
+	    alert("Nope, wrong code!");
+	  }
+	};
+
+	module.exports = Game;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	function Bluecifer(options) {
+	  options = options || {};
+	  this.x = options.x || 150;
+	  this.y = options.y || 150;
+	  this.width = options.width || 50;
+	  this.height = options.height || 41;
+	  this.image = "../IMGS/blue.png";
+	  this.gravityState = 1;
+	}
+
+	Bluecifer.prototype.draw = function (ctx) {
+	  var image = new Image();
+	  image.src = this.image;
+	  ctx.drawImage(image, this.x, this.y, this.width, this.height);
+	  return this;
+	};
+
+	Bluecifer.prototype.moveUp = function () {
+	  this.y = this.y - 20;
+	};
+
+	Bluecifer.prototype.gravity = function () {
+	  this.y += this.gravityState;
+	};
+
+	Bluecifer.prototype.topRight = function () {
+	  var x = this.x + this.width;
+	  var y = this.y;
+	  return { x: x, y: y };
+	};
+
+	Bluecifer.prototype.bottomRight = function () {
+	  var x = this.x + this.width;
+	  var y = this.y + this.height;
+	  return { x: x, y: y };
+	};
+
+	module.exports = Bluecifer;
 
 /***/ }
 /******/ ]);
