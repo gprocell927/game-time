@@ -10149,7 +10149,6 @@
 
 	function Enemy(options) {
 	  this.options = options || {};
-	  this.id = Date.now();
 	  this.x = this.options.x || 800;
 	  this.y = this.options.y || this.randomY();
 	  this.width = this.options.width || 50;
@@ -10169,7 +10168,7 @@
 	Enemy.prototype.randomY = function () {
 	  var min = 0;
 	  var max = 300;
-	  return Math.floor(Math.random() * (max - min) + min);
+	  return randomize(min, max);
 	};
 
 	Enemy.prototype.randomSpeed = function () {
@@ -10180,27 +10179,35 @@
 	  if (counter < 1000) {
 	    min = 0.5;
 	    max = 3;
-	    $('#game-score').css("color", "black");
+	    assignGameScoreColor("black");
 	  } else if (counter < 2000) {
 	    min = 1.5;
 	    max = 3;
-	    $('#game-score').css("color", "green");
+	    assignGameScoreColor("green");
 	  } else if (counter < 3000) {
 	    //six seconds
 	    min = 2.5;
 	    max = 4;
-	    $('#game-score').css("color", "rgb(153, 152, 25)");
+	    assignGameScoreColor("rgb(153, 152, 25)");
 	  } else if (counter < 4000) {
 	    min = 3.5;
 	    max = 5;
-	    $('#game-score').css("color", "red");
+	    assignGameScoreColor("red");
 	  } else if (counter < 5000) {
 	    min = 4.5;
 	    max = 6;
 	  }
 
-	  return Math.random() * (max - min) + min;
+	  return randomize(min, max);
 	}; //end of randomSpeed()
+
+	function assignGameScoreColor(color) {
+	  $('#game-score').css("color", color);
+	}
+
+	function randomize(min, max) {
+	  return Math.floor(Math.random() * (max - min) + min);
+	}
 
 	Enemy.prototype.draw = function (ctx) {
 	  var image = new Image();
@@ -10256,10 +10263,14 @@
 	  this.bluecifer.draw(this.ctx);
 	  this.bluecifer.gravity();
 	  this.detectFloorCollision();
+	  this.setUpEnemies(blueciferY);
+	  this.keepScore();
+	};
+
+	Game.prototype.setUpEnemies = function (blueciferY) {
 	  this.createNewEnemies();
 	  this.drawEnemiesFromArray(blueciferY);
 	  this.detectEnemyCollision();
-	  this.keepScore();
 	};
 
 	Game.prototype.clearCanvas = function () {
@@ -10355,7 +10366,6 @@
 
 	Game.prototype.gameOver = function () {
 	  $('#game-over').css('visibility', 'visible');
-
 	  this.enemies.length = 0;
 	  this.active = false;
 	  this.pauseThemeSong();

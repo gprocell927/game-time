@@ -52,7 +52,32 @@
 	var enemy = new Enemy();
 	var game = new Game();
 
-	$('start-game').css('visibility', 'visible');
+	var startGame = $('#start-game');
+	var gameOver = $('#game-over');
+	var youWin = $('#you-win');
+	var finalScore = $("#final-score-display");
+
+	function hideStartScreen() {
+	  startGame.css('visibility', 'hidden');
+	}
+
+	function showStartScreen() {
+	  startGame.css('visibility', 'visible');
+	}
+
+	function hideGameOverScreen() {
+	  gameOver.css('visibility', 'hidden');
+	}
+
+	function hideYouWinScreen() {
+	  youWin.css('visibility', 'hidden');
+	}
+
+	function clearFinalScore() {
+	  finalScore.text("");
+	}
+
+	showStartScreen();
 
 	function repeat() {
 	  if (game.active === true) {
@@ -63,32 +88,42 @@
 	  }
 	}
 
-	$(document).on("click", function () {
-	  $('#start-game').css('visibility', 'hidden');
-	  $('#game-over').css('visibility', 'hidden');
-	  $('#you-win').css('visibility', 'hidden');
-	  $("#final-score-display").text("");
-	  game.startGame();
-	  repeat();
+	function restoreGameToOriginalState() {
+	  hideStartScreen();
+	  hideGameOverScreen();
+	  hideYouWinScreen();
+	  clearFinalScore();
+	}
+
+	function restartEnemiesAndSongs() {
 	  enemy.increaseCounter();
 	  game.pauseCelebration();
 	  game.playThemeSong();
+	}
+
+	$("#start-game, #game-over, #you-win").on("click", function () {
+	  restoreGameToOriginalState();
+	  game.startGame();
+	  repeat();
+	  restartEnemiesAndSongs();
 	});
 
 	$(document).on("keydown", function (key) {
 	  if (key.which === 32) {
-	    if ($('start-game').css('visibility', 'hidden')) {
+	    if (startGame.css('visibility', 'hidden')) {
 	      game.bluecifer.moveUp();
 	      game.detectCeilingCollision();
 	    } else {
 	      game.resetGame();
 	    }
-	  } else if (key.which === 13) {
-	    game.pauseThemeSong();
-	  } else if (key.which === 85 && $('start-game').css('visibility', 'visible')) {
-	    var code = prompt("Enter cheat code");
-	    game.cheat(code);
-	  }
+	  } //end of space bar options
+	  else if (key.which === 13) {
+	      game.pauseThemeSong();
+	    } //end of enter option
+	    else if (key.which === 85) {
+	        var code = prompt("Enter cheat code");
+	        game.cheat(code);
+	      } //end of u keypress option
 	});
 
 /***/ },
@@ -10181,7 +10216,6 @@
 
 	function Enemy(options) {
 	  this.options = options || {};
-	  this.id = Date.now();
 	  this.x = this.options.x || 800;
 	  this.y = this.options.y || this.randomY();
 	  this.width = this.options.width || 50;
@@ -10201,7 +10235,7 @@
 	Enemy.prototype.randomY = function () {
 	  var min = 0;
 	  var max = 300;
-	  return Math.floor(Math.random() * (max - min) + min);
+	  return randomize(min, max);
 	};
 
 	Enemy.prototype.randomSpeed = function () {
@@ -10212,27 +10246,35 @@
 	  if (counter < 1000) {
 	    min = 0.5;
 	    max = 3;
-	    $('#game-score').css("color", "black");
+	    assignGameScoreColor("black");
 	  } else if (counter < 2000) {
 	    min = 1.5;
 	    max = 3;
-	    $('#game-score').css("color", "green");
+	    assignGameScoreColor("green");
 	  } else if (counter < 3000) {
 	    //six seconds
 	    min = 2.5;
 	    max = 4;
-	    $('#game-score').css("color", "rgb(153, 152, 25)");
+	    assignGameScoreColor("rgb(153, 152, 25)");
 	  } else if (counter < 4000) {
 	    min = 3.5;
 	    max = 5;
-	    $('#game-score').css("color", "red");
+	    assignGameScoreColor("red");
 	  } else if (counter < 5000) {
 	    min = 4.5;
 	    max = 6;
 	  }
 
-	  return Math.random() * (max - min) + min;
+	  return randomize(min, max);
 	}; //end of randomSpeed()
+
+	function assignGameScoreColor(color) {
+	  $('#game-score').css("color", color);
+	}
+
+	function randomize(min, max) {
+	  return Math.floor(Math.random() * (max - min) + min);
+	}
 
 	Enemy.prototype.draw = function (ctx) {
 	  var image = new Image();
@@ -10288,10 +10330,14 @@
 	  this.bluecifer.draw(this.ctx);
 	  this.bluecifer.gravity();
 	  this.detectFloorCollision();
+	  this.setUpEnemies(blueciferY);
+	  this.keepScore();
+	};
+
+	Game.prototype.setUpEnemies = function (blueciferY) {
 	  this.createNewEnemies();
 	  this.drawEnemiesFromArray(blueciferY);
 	  this.detectEnemyCollision();
-	  this.keepScore();
 	};
 
 	Game.prototype.clearCanvas = function () {
@@ -10387,7 +10433,6 @@
 
 	Game.prototype.gameOver = function () {
 	  $('#game-over').css('visibility', 'visible');
-
 	  this.enemies.length = 0;
 	  this.active = false;
 	  this.pauseThemeSong();
