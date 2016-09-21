@@ -13,24 +13,24 @@ describe('Bluecifer', function () {
   });
 
   it('should take the first argument and set it as the "x" property of the instantiated object', function (){
-    var bluecifer = new Bluecifer(15);
+    var bluecifer = new Bluecifer({x:15});
     assert.equal(bluecifer.x,15);
   });
 
   it('should take take the second argument and set it as the "y" property of the instantiated object', function () {
-    var bluecifer = new Bluecifer(15, 30);
+    var bluecifer = new Bluecifer({x:15, y:30});
     assert.equal(bluecifer.y, 30);
   });
 
   it('should take the third argument and set it as the "width" property of the instantiated object',
   function () {
-    var bluecifer = new Bluecifer(15, 30, 45);
+    var bluecifer = new Bluecifer({x:15, y:30, width: 45});
     assert.equal(bluecifer.width, 45);
   });
 
   it('should take the fourth argument and set it as the "height" property of the instantiated object',
   function () {
-    var bluecifer = new Bluecifer(15, 30, 45, 60);
+    var bluecifer = new Bluecifer({x: 15, y: 30, width:45, height:60});
     assert.equal(bluecifer.height, 60);
   });
 
@@ -41,8 +41,8 @@ describe('Bluecifer', function () {
       assert.isFunction(bluecifer.gravity);
       });
 
-    it('"gravity()" should decrement the "y" property by 1', function () {
-      var bluecifer = new Bluecifer(15, 30);
+    it('"gravity()" should increment the "y" property by 1', function () {
+      var bluecifer = new Bluecifer({y: 30});
       bluecifer.gravity();
       assert.equal(bluecifer.y, 31);
     });
@@ -52,8 +52,8 @@ describe('Bluecifer', function () {
       assert.isFunction(bluecifer.moveUp);
     });
 
-    it('"moveUp()" should increment the "y" property by 20', function () {
-      var bluecifer = new Bluecifer(15, 30);
+    it('"moveUp()" should decrement the "y" property by 20', function () {
+      var bluecifer = new Bluecifer({y:30});
       bluecifer.moveUp();
       assert.equal(bluecifer.y, 10);
     });
@@ -64,7 +64,7 @@ describe('Bluecifer', function () {
     });
 
     it('"topRight()" should find the top right corner of Bluecifer', function () {
-      var bluecifer = new Bluecifer(15, 30, 45, 60);
+      var bluecifer = new Bluecifer({x:15, y:30, width:45});
       assert.equal(bluecifer.topRight().x, 60);
       assert.equal(bluecifer.topRight().y, 30);
     });
@@ -75,7 +75,7 @@ describe('Bluecifer', function () {
     });
 
     it ('"bottomRight()" should find the bottom right corner of Bluecifer', function () {
-      var bluecifer = new Bluecifer(15, 30, 45, 60);
+      var bluecifer = new Bluecifer({x:15, y:30, width:45, height:60});
       assert.equal(bluecifer.bottomRight().x, 60);
       assert.equal(bluecifer.bottomRight().y, 90);
     });
