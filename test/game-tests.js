@@ -11,7 +11,7 @@ describe ('Game', function() {
     assert.isArray(game.enemies, true);
   });
 
-  it (' should create one enemey when "createNewEnemies()" is called', function () {
+  it (' should create one enemy when "createNewEnemies()" is called', function () {
     var game = new Game();
 
     game.createNewEnemies();
