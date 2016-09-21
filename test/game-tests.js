@@ -43,10 +43,18 @@ describe ('Game', function() {
   });
 
   context('detectEnemyCollision()', function() {
-    it('should pass on first condition', function() {
+    it('when Bluecifer collides with an enemy, game.active is set to false ', function() {
       var game = new Game();
-      game.enemies.push(new Enemy({x: 1, y:2}));
-      game.bluecifer = new Bluecifer({x: 7, y: 10});
+      game.enemies.push(new Enemy({x: 1, y:10, width: 30, height: 30}));
+      game.bluecifer = new Bluecifer({x: 1, y: 10, width: 10, height:10});
+      game.detectEnemyCollision();
+      assert(game.active===false, "Game.active is false");
+    });
+
+    it('when Bluecifer does not collide with an enemy, game.active is set to true ', function() {
+      var game = new Game();
+      game.enemies.push(new Enemy({x: 1, y:2 ,height: 35, width: 34}));
+      game.bluecifer = new Bluecifer({x: 7, y: 40, height: 41, width: 40});
       game.detectEnemyCollision();
       assert(game.active, true);
     });
