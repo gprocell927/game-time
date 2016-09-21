@@ -10220,7 +10220,7 @@
 	  this.y = this.options.y || this.randomY();
 	  this.width = this.options.width || 50;
 	  this.height = this.options.height || 35;
-	  this.image = this.options.image || "../IMGS/airplane.png";
+	  this.image = this.options.image || "IMGS/airplane.png";
 	  this.speed = this.options.speed || this.randomSpeed();
 	}
 
@@ -10476,7 +10476,7 @@
 	  this.y = options.y || 150;
 	  this.width = options.width || 50;
 	  this.height = options.height || 41;
-	  this.image = "../IMGS/blue.png";
+	  this.image = "IMGS/blue.png";
 	  this.gravityState = 1;
 	}
 
