@@ -1,3 +1,11 @@
+##Bluecifer's Revenge
+
+Welcome to Bluecifer's Revenge! 
+
+
+
+##Below are the original project specs, available at http://frontend.turing.io/projects/game-time.html
+
 ---
 title: Game Time
 length: 2
