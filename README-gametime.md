@@ -1,13 +1,16 @@
 ##Bluecifer's Revenge
 
-[Play it live!](https://gprocell927.github.io/game-time/).
+[Play it!](https://gprocell927.github.io/game-time/).
 
 Welcome to Bluecifer's Revenge! Bluecifer, [the infamous blue horse at Denver International Airport (DIA)](https://en.wikipedia.org/wiki/Blue_Mustang), is lost and must return home to DIA! In order to get home more quickly, Bluecifer utilizes his power to fly, but he must avoid airplanes in the sky in order to make it safely home! Your job is to assist him in avoiding these obstacles by using the space bar to make him jump. Don't let him fall to the ground, or he'll die!
 
+As you survive, the airplanes fly more quickly, so you'll need to channel all of Bluecifer's energy in order to get him home safely!
 
+A few notes:
 
-
-
+* Score: The game timer is your score. As the time counts up, the game gets harder. You win by reaching a certain time.
+* Lives: You start the game anew each time you die.
+* Music: That's Spark Mandrill stage from Mega Man X.
 
 
 ##Below are the [original project specs](http://frontend.turing.io/projects/game-time.html).
